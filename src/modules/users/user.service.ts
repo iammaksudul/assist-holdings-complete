@@ -1,0 +1,56 @@
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
+import AppError from "../../helpers/AppError";
+import { envVars } from "../../config/env";
+
+const prisma = new PrismaClient();
+
+const createUser = async (data: {
+  name: string;
+  email: string;
+  password: string;
+}) => {
+  const existing = await prisma.user.findUnique({
+    where: { email: data.email },
+  });
+  if (existing) throw new AppError(400, "Email already registered");
+
+  const hashedPassword = await bcrypt.hash(
+    data.password,
+    Number(envVars.BCRYPT_SALT_ROUNDS)
+  );
+
+  const user = await prisma.user.create({
+    data: {
+      name: data.name,
+      email: data.email,
+      password: hashedPassword,
+      role:"ADMIN"
+    },
+  });
+  // hide password
+  const { password, ...safeUser } = user;
+  return safeUser;
+};
+
+const getAllAdmin = async () => {
+  const user = await prisma.user.findMany({
+    select: {
+      email: true,
+      id: true,
+      name: true,
+      role: true,
+      createdAt:true
+    },
+  });
+
+  if (!user) {
+    throw new AppError(404, "User not found");
+  }
+  return user;
+};
+
+export const userServices = {
+  createUser,
+  getAllAdmin,
+};

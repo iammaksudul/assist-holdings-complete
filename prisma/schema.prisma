@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+}
+
+model Schedule {
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  date      String
+  phone     String
+  message   String
+  status    ScheduleStatus @default(PENDING)
+  createdAt DateTime       @default(now())
+}
+
+model Perfections {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  Title             String
+  description       String
+  description2      String
+  description3      String
+  FeaturesAmenities Json?
+  videoUrl          String
+  galleryImages     String[]
+  Category          String
+  Type              String
+  Location          String
+  extraFields       Json?
+  status            Status   @default(CONFIRMED)
+  createdAt         DateTime @default(now())
+}
+
+model testimonials {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  name      String
+  Image     String
+  status    Status   @default(CONFIRMED)
+  createdAt DateTime @default(now())
+}
+
+model concerns {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  title     String
+  Image     String
+  status    Status   @default(CONFIRMED)
+  createdAt DateTime @default(now())
+}
+
+model contact {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  email          String   @unique
+  phone          String
+  whatsappNumber String
+  fbLink         String
+  instagramLink  String
+  linkedInLink   String
+  youtubeLink    String
+  address        String
+  workTime       String
+  workSchedule   String
+  logo           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model blogs {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  title     String
+  Image     String
+  status    Status   @default(CONFIRMED)
+  createdAt DateTime @default(now())
+}
+
+model Slider {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  text      String
+  Image     String
+  status    Status   @default(CONFIRMED)
+  createdAt DateTime @default(now())
+}
+
+model News {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  title     String
+  Image     String
+  status    Status   @default(CONFIRMED)
+  createdAt DateTime @default(now())
+}
+
+model Media {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  image     String[]
+  videoUrl     String?
+  status    Status   @default(CONFIRMED)
+  createdAt DateTime @default(now())
+}
+
+model Enquiry {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName         String
+  lastName          String
+  phone             String
+  secondPhone       String
+  location          String
+  landSize          String
+  attractiveFeature String
+  message           String
+  email             String   @unique
+  status            Status   @default(CONFIRMED)
+  createdAt         DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Status {
+  CONFIRMED
+  CANCELLED
+  PENDING
+}
+
+enum ScheduleStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
