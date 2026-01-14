@@ -8,7 +8,7 @@ const Gallery = () => {
     <div>
       <LandownerBanner
         img={
-          "http://assistholdingsltd.com/images/1766054311360_gallery.png"
+          "https://job-task-2-backend-eight.vercel.app/images/1766054311360_gallery.png"
         }
         title="Gallery
 "

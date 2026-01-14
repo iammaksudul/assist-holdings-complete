@@ -15,7 +15,7 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const response = await fetch('https://assistholdingsltd.com/api/api/v1/auth/login', {
+      const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

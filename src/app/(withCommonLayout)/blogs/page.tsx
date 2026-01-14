@@ -9,7 +9,7 @@ const Blogs = () => {
     <div>
       <LandownerBanner
         img={
-          "https://assistholdingsltd.com/images/1766053900448_civil.png"
+          "https://job-task-2-backend-eight.vercel.app/images/1766053900448_civil.png"
         }
         title="blogs"
         // text="find your nest"

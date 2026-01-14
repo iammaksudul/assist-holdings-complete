@@ -89,7 +89,7 @@ export default function ProjectDetailPage() {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://assistholdingsltd.com/api/api/v1/perfections"
+          "${process.env.NEXT_PUBLIC_API_URL}/api/v1/perfections"
         );
         const result = await response.json();
 
