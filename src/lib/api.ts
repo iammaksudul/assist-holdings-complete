@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://job-task-2-backend-eight.vercel.app/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://job-task-2-backend-eight.vercel.app';
 
 const api = axios.create({
   baseURL: API_URL,
