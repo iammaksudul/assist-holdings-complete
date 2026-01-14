@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { jwtDecode } from "jwt-decode";
+import api from "../lib/api";
 
 const authKey = "token";
 
@@ -60,4 +61,17 @@ export const isLoggedIn = () => {
 // 🔹 Remove user (logout)
 export const removeUser = () => {
   return removeFromLocalStorage(authKey);
+};
+
+// 🔹 API Services
+export const authService = {
+  login: async (data: any) => {
+    const response = await api.post('/auth/login', data);
+    return response.data;
+  },
+  
+  register: async (data: any) => {
+    const response = await api.post('/auth/register', data);
+    return response.data;
+  },
 };
